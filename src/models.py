@@ -18,6 +18,8 @@ class User(Base):
     firstname = Column(String(250), nullable=False)
     lastname = Column(String(250), nullable=False)
     email = Column(String(250), nullable=False)
+    def to_dict(self):
+        return {}
 
 class Follower(Base):
     __tablename__ = 'follower'
@@ -25,12 +27,16 @@ class Follower(Base):
     # Notice that each column is also a normal Python instance attribute.
     user_from_id = Column(Integer, nullable=False)
     user_to_id = Column(Integer, nullable=False)
+    def to_dict(self):
+        return {}
 
 
 class Post(Base):
     __tablename__ = 'post'
     ID = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.ID'))
+    def to_dict(self):
+        return {}
 
 class Comment(Base):
     __tablename__ = 'comment'
@@ -38,9 +44,9 @@ class Comment(Base):
     comment_text = Column(String(250), nullable=False)
     author_id = Column(Integer, ForeignKey('user.ID'))
     post_id = Column(Integer, ForeignKey('post.ID'))
+    def to_dict(self):
+        return {}
 
-    # Here we define columns for the table person
-    # Notice that each column is also a normal Python instance attribute.
 
 class Media(Base):
     __tablename__ = 'media'
@@ -48,9 +54,6 @@ class Media(Base):
     type = Column(enumerate, nullable=False)
     url = Column(String(205), nullable=False)
     post_id = Column(Integer, ForeignKey('post.ID'))
-
-
-
     def to_dict(self):
         return {}
 
